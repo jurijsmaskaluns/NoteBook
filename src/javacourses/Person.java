@@ -1,18 +1,10 @@
 package javacourses;
 
-public class Person {
-    private static int counter =0; // dlja vseh person counter odin
-    private int id;
+public class Person extends Record {
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
-
-    public Person(){
-        counter++;
-        id = counter;
-//        System.out.printf("i,m a new persen");
-    }
 
     public String getEmail() {
         return email;
@@ -46,18 +38,33 @@ public class Person {
         this.phone = phone;
     }
 
-    public int getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", firstName= '" + firstName + '\'' +
                 ", lastName= '" + lastName + '\'' +
                 ", phone= '" + phone + '\'' +
                 ", email= '" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public void askUserData() {
+        String firstName = Main.askString("First Name: ");
+        String lastName = Main.askString("Last Name: ");
+        String phone = Main.askString("Phone: ");
+        String email = Main.askString("email: ");
+
+        setFirstName(firstName);
+        setLastName(lastName);
+        setPhone(phone);
+        setEmail(email);
+
+    }
+
+    @Override
+    public boolean contains(String part) {
+        return false;
     }
 }
