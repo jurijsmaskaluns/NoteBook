@@ -40,7 +40,7 @@ public class Main {
         }
     }
     private static void help(){
-        System.out.println("cmd: create -> person\ncmd: list \ncmd: exit");
+        System.out.println("cmd: create(person)\ncmd: list \ncmd: exit");
     }
     private static void list() {
         for (Person p : records) {
