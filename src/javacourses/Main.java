@@ -24,8 +24,12 @@ public class Main {
             switch (cmd.toLowerCase()) {
                 case "exit":
                     return;
+                case "help":
+                    help();
+                    break;
                 case "list":
                     list();
+                    break;
                 case "create":
                     create();
                     break;
@@ -35,7 +39,9 @@ public class Main {
 
         }
     }
-
+    private static void help(){
+        System.out.println("cmd: create -> person\ncmd: list \ncmd: exit");
+    }
     private static void list() {
         for (Person p : records) {
             System.out.println(p);
@@ -59,19 +65,18 @@ public class Main {
     }
 
     private static void createPerson() {
+        String firstName = askString("First Name: ");
+        String lastName = askString("Last Name: ");
+        String phone = askString("Phone: ");
+        String email = askString("email: ");
+
         Person person = new Person();
-
-        System.out.print("First name: ");
-        person.setFirstName(scanner.next()); //s4itivaet i kladjot v klass person imja
-
-        System.out.print("Second name: ");
-        person.setLastName(scanner.next());
-
-        System.out.print("phone: ");
-        person.setPhone(scanner.next());
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setPhone(phone);
+        person.setEmail(email);
 
         records.add(person);
-
     }
     private static String askString(String message){
         System.out.print(message);
