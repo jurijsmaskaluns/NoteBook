@@ -80,6 +80,19 @@ public class Main {
     }
     private static String askString(String message){
         System.out.print(message);
-        return scanner.next();
+
+        String str = scanner.next();
+        if (str.startsWith("\"")){
+            ArrayList<String> list = new ArrayList<>();
+            list.add(str);
+            while (!str.endsWith("\"")){
+                str = scanner.next();
+                list.add(str);
+            }
+            str = String.join(" ", list);
+            str = str.substring(1, str.length()-1); // udaljaem kavi4ki v na4ale i v konce
+        }
+
+        return str;
     }
 }
