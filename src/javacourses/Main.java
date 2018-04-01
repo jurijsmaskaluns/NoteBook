@@ -75,11 +75,11 @@ public class Main {
                     addRecord(new Person());
                     return;
                 case "note":
-                    addRecord(new Note());
-                    return;
-                case "alarm":
                     addRecord(new Alarm());
                     return;
+//                case "alarm":
+//                    addRecord(new Alarm());
+//                    return;
                 default:
                     System.out.println("Unknown command in create");
             }
@@ -94,7 +94,7 @@ public class Main {
     }
 
     private static void helpCreate() {
-        System.out.println("cmd: person\ncmd: note \ncmd: alarm \ncmd: exit");
+        System.out.println("cmd: person\ncmd: note \ncmd: exit");
     }
 //    private static void noteX(){
 //        String text = askString("write note(start \" and end \"): ");
