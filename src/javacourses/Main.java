@@ -44,7 +44,7 @@ public class Main {
     }
 
     private static void help() {
-        System.out.println("cmd: create\ncmd: list \ncmd: exit");
+        System.out.println("cmd: create\ncmd: list \ncmd: find \ncmd: exit");
     }
 
     private static void list() {
@@ -69,13 +69,16 @@ public class Main {
                 case "exit":
                     return;
                 case "help":
-                    helpC();
+                    helpCreate();
                     break;
                 case "person":
                     addRecord(new Person());
                     return;
                 case "note":
                     addRecord(new Note());
+                    return;
+                case "alarm":
+                    addRecord(new Alarm());
                     return;
                 default:
                     System.out.println("Unknown command in create");
@@ -90,8 +93,8 @@ public class Main {
         System.out.println("created!");
     }
 
-    private static void helpC() {
-        System.out.println("cmd: person\ncmd: note \ncmd: exit");
+    private static void helpCreate() {
+        System.out.println("cmd: person\ncmd: note \ncmd: alarm \ncmd: exit");
     }
 //    private static void noteX(){
 //        String text = askString("write note(start \" and end \"): ");
