@@ -2,14 +2,20 @@ package javacourses;
 
 public class Alarm extends Note {
     private String time;
-    public String getTime() { return time; }
-    public void setTime(String time) { this.time = time; }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     @Override
     public String toString() {
         return "Alarm{" +
                 "id=" + getId() +
-                ", Note= '" + getText() + '\'' +
+                ", Text= '" + getText() + '\'' +
                 ", Time= '" + time + '\'' +
                 '}';
     }
@@ -20,14 +26,11 @@ public class Alarm extends Note {
         setTime(time);
         String text = Main.askString("write note(start \" and end \"): ");
         setText(text);
- }
-
+    }
 
     @Override
     public boolean contains(String part) {
         String t = getText();
         return (time.contains(part) || t.contains(part));
-
- //       return text.contains(part);
     }
 }

@@ -10,13 +10,9 @@ public class Main {
     //    static File Records = new File("Records.txt");
     static ArrayList<Record> records = new ArrayList<>();
 
-
     public static void main(String[] args) {
         commandLoop();
     }
-
-    // write your code here
-
 
     private static void commandLoop() {
         for (; ; ) {
@@ -75,11 +71,11 @@ public class Main {
                     addRecord(new Person());
                     return;
                 case "note":
+                    addRecord(new Note());
+                    return;
+                case "alarm":
                     addRecord(new Alarm());
                     return;
-//                case "alarm":
-//                    addRecord(new Alarm());
-//                    return;
                 default:
                     System.out.println("Unknown command in create");
             }
@@ -94,7 +90,7 @@ public class Main {
     }
 
     private static void helpCreate() {
-        System.out.println("cmd: person\ncmd: note \ncmd: exit");
+        System.out.println("cmd: person\ncmd: note \ncmd: alarm \ncmd: exit");
     }
 //    private static void noteX(){
 //        String text = askString("write note(start \" and end \"): ");
@@ -130,7 +126,6 @@ public class Main {
             str = String.join(" ", list);
             str = str.substring(1, str.length() - 1); // udaljaem kavi4ki v na4ale i v konce
         }
-
         return str;
     }
 }
