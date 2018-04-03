@@ -1,13 +1,18 @@
 package javacourses;
 
-public class Alarm extends Note {
-    private String time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public String getTime() {
+public class Alarm extends Note {
+    public static final String TIME_FORMAT = "HH:mm";
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private LocalTime time;
+
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -22,15 +27,15 @@ public class Alarm extends Note {
 
     @Override
     public void askUserData() {
-        String time = Main.askString("write Note time: ");
+        String strTime = Main.askString("write time(" + TIME_FORMAT + "): ");
+        LocalTime time = LocalTime.parse(strTime, TIME_FORMATTER);
         setTime(time);
-        String text = Main.askString("write note(start \" and end \"): ");
-        setText(text);
+        super.askUserData();
     }
 
     @Override
     public boolean contains(String part) {
-        String t = getText();
-        return (time.contains(part) || t.contains(part));
+        String strTime = TIME_FORMATTER.format(time); //vremja konvertiruetsja v stroku
+        return strTime.contains(part) || super.contains(part);
     }
 }

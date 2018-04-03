@@ -20,7 +20,7 @@ public class Note extends Record {
 
     @Override
     public void askUserData() {
-        String text = Main.askString("write note(start \" and end \"): ");
+        String text = Main.askString("write text(start \" and end \"): ");
         setText(text);
     }
 

@@ -2,6 +2,7 @@ package javacourses;
 
 //import java.io.File;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,6 +33,9 @@ public class Main {
                 case "find":
                     find();
                     break;
+                case "expired":
+                    findExpired();
+                    break;
                 default:
                     System.out.println("Unknown command");
             }
@@ -39,8 +43,20 @@ public class Main {
         }
     }
 
+    private static void findExpired() {
+        for(Record r : records){
+            LocalTime now = LocalTime.now();
+            if (r instanceof Alarm){ //prosmatrivaet record kotorij javljaetsja alarm (filjtr Alarmov)
+                Alarm a = (Alarm) r; // peremennaja a tipa alarm v record r
+                if (a.getTime().isBefore(now)){
+                    System.out.println(a);
+                }
+            }
+        }
+    }
+
     private static void help() {
-        System.out.println("cmd: create\ncmd: list \ncmd: find \ncmd: exit");
+        System.out.println("cmd: create\ncmd: list \ncmd: find \ncmd: expired \ncmd: exit");
     }
 
     private static void list() {
@@ -76,6 +92,9 @@ public class Main {
                 case "alarm":
                     addRecord(new Alarm());
                     return;
+                case "reminder":
+                    addRecord(new Reminder());
+                    return;
                 default:
                     System.out.println("Unknown command in create");
             }
@@ -90,7 +109,7 @@ public class Main {
     }
 
     private static void helpCreate() {
-        System.out.println("cmd: person\ncmd: note \ncmd: alarm \ncmd: exit");
+        System.out.println("cmd: person\ncmd: note \ncmd: alarm \ncmd: reminder \ncmd: exit");
     }
 //    private static void noteX(){
 //        String text = askString("write note(start \" and end \"): ");
