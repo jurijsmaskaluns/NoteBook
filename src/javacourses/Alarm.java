@@ -27,10 +27,14 @@ public class Alarm extends Note {
 
     @Override
     public void askUserData() {
-        String strTime = Main.askString("write time(" + TIME_FORMAT + "): ");
-        LocalTime time = LocalTime.parse(strTime, TIME_FORMATTER);
-        setTime(time);
-        super.askUserData();
+        try {
+            String strTime = Main.askString("write time(" + TIME_FORMAT + "): ");
+            LocalTime time = LocalTime.parse(strTime, TIME_FORMATTER);
+            setTime(time);
+            super.askUserData();
+        }catch (Exception e){
+            System.out.println("wrong format !!!!");
+        }
     }
 
     @Override
