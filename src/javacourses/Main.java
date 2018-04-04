@@ -2,6 +2,8 @@ package javacourses;
 
 //import java.io.File;
 
+import com.sun.org.apache.xml.internal.utils.StringToIntTable;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,6 +38,9 @@ public class Main {
                 case "expired":
                     findExpired();
                     break;
+                case "show":
+                    show();
+                    break;
                 default:
                     System.out.println("Unknown command");
             }
@@ -44,11 +49,11 @@ public class Main {
     }
 
     private static void findExpired() {
-        for(Record r : records){
+        for (Record r : records) {
             LocalTime now = LocalTime.now();
-            if (r instanceof Alarm){ //prosmatrivaet record kotorij javljaetsja alarm (filjtr Alarmov)
+            if (r instanceof Alarm) { //prosmatrivaet record kotorij javljaetsja alarm (filjtr Alarmov)
                 Alarm a = (Alarm) r; // peremennaja a tipa alarm v record r
-                if (a.getTime().isBefore(now)){
+                if (a.getTime().isBefore(now)) {
                     System.out.println(a);
                 }
             }
@@ -56,13 +61,31 @@ public class Main {
     }
 
     private static void help() {
-        System.out.println("cmd: create\ncmd: list \ncmd: find \ncmd: expired \ncmd: exit");
+        System.out.println("cmd: create\ncmd: list \ncmd: find \ncmd: expired \ncmd: show \ncmd: exit");
     }
 
     private static void list() {
         for (Record r : records) {
             System.out.println(r);
         }
+    }
+
+    private static void show() {
+        for (; ; ) {
+            try {
+                String strPart = askString("What ID? ");
+                int part = Integer.valueOf(strPart);
+                for (Record r : records) {
+                    if (part == r.getId()) {
+                        System.out.println(r);
+                    }
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println("not number !!!");
+            }
+        }
+
     }
 
     private static void find() {

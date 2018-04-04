@@ -1,8 +1,7 @@
 package javacourses;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
-
 
 public class Reminder extends Alarm {
 
@@ -32,17 +31,17 @@ public class Reminder extends Alarm {
 
     @Override
     public void askUserData() {
-        try {
-
-            String strDate = Main.askString("write Reminder date(" + DATE_FORMAT + ") :");
-            LocalDate date = LocalDate.parse(strDate, DATE_FORMATTER);
-            setDate(date);
-            super.askUserData();
-        } catch (Exception e){
-            System.out.println("wrong format !!!!");
-            askUserData();
+        for (; ; ) {
+            try {
+                String strDate = Main.askString("write Reminder date(" + DATE_FORMAT + ") :");
+                LocalDate date = LocalDate.parse(strDate, DATE_FORMATTER);
+                setDate(date);
+                super.askUserData();
+                break;
+            } catch (Exception e) {
+                System.out.println("wrong Date format !!!!");
+            }
         }
-
     }
 
     @Override
