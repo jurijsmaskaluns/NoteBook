@@ -2,6 +2,7 @@ package javacourses;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Alarm extends Note {
     public static final String TIME_FORMAT = "HH:mm";
@@ -34,7 +35,7 @@ public class Alarm extends Note {
                 setTime(time);
                 super.askUserData();
                 break;
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 System.out.println("wrong Time format !!!!");
             }
         }

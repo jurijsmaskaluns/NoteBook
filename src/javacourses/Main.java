@@ -6,12 +6,14 @@ import com.sun.org.apache.xml.internal.utils.StringToIntTable;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     //    static File Records = new File("Records.txt");
-    static ArrayList<Record> records = new ArrayList<>();
+    //static ArrayList<Record> records = new ArrayList<>();
+    static HashMap<Integer, Record> recordsMap = new HashMap<>(); //assiotivnij spisok
 
     public static void main(String[] args) {
         commandLoop();
@@ -39,7 +41,7 @@ public class Main {
                     findExpired();
                     break;
                 case "show":
-                    show();
+                    showById();
                     break;
                 default:
                     System.out.println("Unknown command");
@@ -49,7 +51,7 @@ public class Main {
     }
 
     private static void findExpired() {
-        for (Record r : records) {
+        for (Record r : recordsMap.values()) {
             LocalTime now = LocalTime.now();
             if (r instanceof Alarm) { //prosmatrivaet record kotorij javljaetsja alarm (filjtr Alarmov)
                 Alarm a = (Alarm) r; // peremennaja a tipa alarm v record r
@@ -65,21 +67,17 @@ public class Main {
     }
 
     private static void list() {
-        for (Record r : records) {
+        for (Record r : recordsMap.values()) {
             System.out.println(r);
         }
     }
 
-    private static void show() {
+    private static void showById() {
         for (; ; ) {
             try {
                 String strPart = askString("What ID? ");
                 int part = Integer.valueOf(strPart);
-                for (Record r : records) {
-                    if (part == r.getId()) {
-                        System.out.println(r);
-                    }
-                }
+                Record r = recordsMap.get(part);
                 break;
             } catch (Exception e) {
                 System.out.println("not number !!!");
@@ -90,7 +88,7 @@ public class Main {
 
     private static void find() {
         String part = askString("What to find? ");
-        for (Record r : records) {
+        for (Record r : recordsMap.values()) {
             if (r.contains(part)) {
                 System.out.println(r);
             }
@@ -127,7 +125,8 @@ public class Main {
 
     private static void addRecord(Record record) {
         record.askUserData();
-        records.add(record);
+        int id = record.getId();
+        recordsMap.put(id, record);
         System.out.println("created!");
     }
 

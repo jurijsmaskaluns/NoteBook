@@ -2,6 +2,7 @@ package javacourses;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Reminder extends Alarm {
 
@@ -38,7 +39,7 @@ public class Reminder extends Alarm {
                 setDate(date);
                 super.askUserData();
                 break;
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 System.out.println("wrong Date format !!!!");
             }
         }
@@ -46,7 +47,7 @@ public class Reminder extends Alarm {
 
     @Override
     public boolean contains(String part) {
-        String strDate = TIME_FORMATTER.format(date);
+        String strDate = DATE_FORMATTER.format(date);
         return strDate.contains(part) || super.contains(part);
     }
 
