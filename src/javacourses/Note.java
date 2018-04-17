@@ -11,16 +11,18 @@ public class Note extends Record {
         this.text = text;
     }
 
+
+    @Override
     public String toString() {
         return "Note{" +
                 "id=" + getId() +
-                ", Text= '" + text + '\'' +
+                ", text='" + text + '\'' +
                 '}';
     }
 
     @Override
     public void askUserData() {
-        String text = Main.askString("write text(start \" and end \"): ");
+        String text = Main.askString("Enter note's text: ");
         setText(text);
     }
 

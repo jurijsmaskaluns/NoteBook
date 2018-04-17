@@ -1,13 +1,23 @@
 package javacourses;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-public class Alarm extends Note {
-    public static final String TIME_FORMAT = "HH:mm";
-    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+public class Alarm extends Note implements Expirable {
     private LocalTime time;
+
+    @Override
+    public void askUserData() {
+        super.askUserData();
+        LocalTime time = Main.askTime("Enter time ");
+        setTime(time);
+    }
+
+    @Override
+    public boolean contains(String part) {
+        String strTime = Main.TIME_FORMATTER.format(time);
+        return strTime.contains(part)
+                || super.contains(part);
+    }
 
     public LocalTime getTime() {
         return time;
@@ -21,29 +31,14 @@ public class Alarm extends Note {
     public String toString() {
         return "Alarm{" +
                 "id=" + getId() +
-                ", Text= '" + getText() + '\'' +
-                ", Time= '" + time + '\'' +
+                ", text=" + getText() +
+                ", time='" + time + '\'' +
                 '}';
     }
 
     @Override
-    public void askUserData() {
-        for (; ; ) {
-            try {
-                String strTime = Main.askString("write time(" + TIME_FORMAT + "): ");
-                LocalTime time = LocalTime.parse(strTime, TIME_FORMATTER);
-                setTime(time);
-                super.askUserData();
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("wrong Time format !!!!");
-            }
-        }
-    }
-
-    @Override
-    public boolean contains(String part) {
-        String strTime = TIME_FORMATTER.format(time); //vremja konvertiruetsja v stroku
-        return strTime.contains(part) || super.contains(part);
+    public boolean isExpired() {
+        LocalTime now = LocalTime.now();
+        return time.isBefore(now);
     }
 }

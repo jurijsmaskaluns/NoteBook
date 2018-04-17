@@ -1,7 +1,7 @@
 package javacourses;
 
 public abstract class Record {
-    private static int counter = 0; // dlja vseh person counter odin
+    private static int counter = 0;
     private int id;
 
     public Record() {
@@ -16,4 +16,5 @@ public abstract class Record {
     public abstract void askUserData();
 
     public abstract boolean contains(String part);
+
 }
